@@ -35,9 +35,11 @@
 namespace Skyline\Cache;
 
 
+use Psr\Cache\CacheItemInterface;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
-class CacheManager
+class CacheManager implements AdapterInterface
 {
     const SERVICE_NAME = 'cacheManager';
 
@@ -63,5 +65,50 @@ class CacheManager
     public function getCacheDirectory(): string
     {
         return $this->cacheDirectory;
+    }
+
+    public function getItem($key)
+    {
+        return $this->cacheAdapter->getItem($key);
+    }
+
+    public function getItems(array $keys = [])
+    {
+        return $this->cacheAdapter->getItems($keys);
+    }
+
+    public function clear(string $prefix = '')
+    {
+        return $this->cacheAdapter->clear($prefix);
+    }
+
+    public function hasItem($key)
+    {
+        return $this->cacheAdapter->hasItem($key);
+    }
+
+    public function deleteItem($key)
+    {
+        return $this->cacheAdapter->deleteItem($key);
+    }
+
+    public function deleteItems(array $keys)
+    {
+        return $this->cacheAdapter->getItem($keys);
+    }
+
+    public function save(CacheItemInterface $item)
+    {
+        return $this->cacheAdapter->save($item);
+    }
+
+    public function saveDeferred(CacheItemInterface $item)
+    {
+        return $this->cacheAdapter->saveDeferred($item);
+    }
+
+    public function commit()
+    {
+        return $this->cacheAdapter->commit();
     }
 }
