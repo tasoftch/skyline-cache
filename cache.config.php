@@ -42,7 +42,7 @@ return [
         CacheManager::SERVICE_NAME => [
             AbstractFileConfiguration::SERVICE_CLASS => CacheManager::class,
             AbstractFileConfiguration::SERVICE_INIT_ARGUMENTS => [
-                'directory' => '$(C)/' . CacheCompiler::CACHE_DIRECTORY_NAME
+                'directory' => '$(/)/' . CacheCompiler::CACHE_DIRECTORY_NAME
             ]
         ]
     ]
