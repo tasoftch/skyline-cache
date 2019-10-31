@@ -37,6 +37,8 @@ namespace Skyline\Cache\Compiler;
 
 use Skyline\Compiler\AbstractCompiler;
 use Skyline\Compiler\CompilerContext;
+use Symfony\Component\Filesystem\Filesystem;
+use TASoft\Service\ServiceManager;
 
 class CacheCompiler extends AbstractCompiler
 {
@@ -44,6 +46,7 @@ class CacheCompiler extends AbstractCompiler
 
     public function compile(CompilerContext $context)
     {
-
+        $fs = new Filesystem();
+        $fs->remove( ServiceManager::generalServiceManager()->mapValue( '$(/)/' . self::CACHE_DIRECTORY_NAME ) );
     }
 }
